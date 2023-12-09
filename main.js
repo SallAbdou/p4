@@ -1,44 +1,37 @@
 import './modal.css'
-import { modalBtn, modalbg, btnClose, lastName, aEditNav, form } from './components/domLinker';
+import { modalBtn, modalbg, btnClose, firstName, lastName, aEditNav, form, myTopNav } from './components/domLinker';
 
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
+
 
 aEditNav.addEventListener('click', () => editNav())
-
-
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+btnClose.addEventListener('click', () => closeModal())
+modalBtn.forEach((btn) => btn.addEventListener("click", () => launchModal()));
+form.addEventListener('submit', event => validForm(event))
 
 // launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
+const launchModal = () => modalbg.style.display = "block"
+//closing button
+const closeModal = () => modalbg.style.display = "none"
+
+const validForm = e => {
+  e.preventDefault()
+  // testName()
+  // testFirstName()
+  testNameAndFirst(firstName)
+  testNameAndFirst(lastName)
+  console.log('formulaire soumis')
 }
 
-btnClose.addEventListener('click', closingFunction)
+const isAlphaWithTwoDigit = value => /^([a-zA-Z]){2,}$/.test(value)
 
-//test closing button
-function closingFunction() {
-
-}
-
-function testName() {
-  if (lastName.value.length < 2) {
-    console.log(lastName.parentNode)
-    lastName.parentNode.setAttribute('data-error-visible', true)
+const editNav = () => {
+  if (myTopNav.className === "topnav") {
+    myTopNav.className += " responsive";
+  } else {
+    myTopNav.className = "topnav";
   }
 }
 
-form.addEventListener('submit', event => {
-  event.preventDefault()
-
-  testName()
-
-  console.log('formulaire soumis')
-})
+// const testName = () => lastName.parentNode.setAttribute('data-error-visible', !isAlphaWithTwoDigit(lastName.value))
+// const testFirstName = () => firstName.parentNode.setAttribute('data-error-visible', !isAlphaWithTwoDigit(firstName.value))
+const testNameAndFirst = inputElement => inputElement.parentNode.setAttribute('data-error-visible', !isAlphaWithTwoDigit(inputElement.value)) 

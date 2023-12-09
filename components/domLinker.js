@@ -17,5 +17,6 @@ export const location5 = document.querySelector("#location5");
 export const location6 = document.querySelector("#location6");
 // menu
 export const aEditNav = document.getElementById('edit-nav')
+export const myTopNav = document.getElementById("myTopnav")
 // form
 export const form = document.getElementById('reserve')
