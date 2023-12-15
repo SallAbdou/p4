@@ -184,6 +184,20 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
+.reserve.validate{
+  display: none;
+}
+
+.validateMessage{
+  display: none;
+  margin: 5% auto;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  background-color: rgba(26, 39, 156, 0.4);
+  color: #fff;
+}
+
 .content {
   margin: 5% auto;
   width: 100%;

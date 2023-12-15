@@ -8,6 +8,10 @@ btnClose.addEventListener('click', () => closeModal())
 modalBtn.forEach((btn) => btn.addEventListener("click", () => launchModal()));
 form.addEventListener('submit', event => validForm(event))
 
+
+
+
+
 // launch modal form
 const launchModal = () => modalbg.style.display = "block"
 //closing button
@@ -22,16 +26,16 @@ const validForm = e => {
   testMail(emailAdd)
   testBirthdate(birthdate)
   testQuantity(quantity)
-  
   //import de la vérfication de tous les boutons radios et attribution du data error
   form.querySelectorAll('input[type="radio"]').forEach(radio => {
     radio.parentNode.setAttribute('data-error-visible', isRadio());
   });
-
-  //import de la vérification du checkbox et attribution du data error
+//import de la vérification du checkbox et attribution du data error
   document.getElementById('checkbox1').parentNode.setAttribute('data-error-visible', !isCheckBox());
 
 
+  //fonction à terminer
+  showValidationMessage()
   console.log('formulaire soumis')
 }
 
@@ -79,3 +83,10 @@ const isCheckBox = () => document.getElementById('checkbox1').checked;
 
 
 
+
+//message de confirmation
+const validationMessage = document.getElementById('validateMessage')
+const showValidationMessage = () => {
+  form.classList.add('confirmation');
+  validationMessage.style.display = 'none';
+}
