@@ -17,8 +17,7 @@
     </div>
     <div class="main-navbar">
 
-      <a href="#" class="active"><span>Accueil</span></a>
-      <a href="#"><span>Détails de l'évènement</span></a>
+      <a href="#" class="active"><span>Détails de l'évènement</span></a>
       <a href="#"><span>À propos</span></a>
       <a href="#"><span>Contact</span></a>
       <a href="#"><span>Évènements passés</span></a>
@@ -59,9 +58,12 @@
 
         <!---Formulaire-->
 
-        <div class="modal-body">
+        <div class="modal-body" id="form-container">
+          <div id="validateMessage" class="validateMessage">
+            Merci pour votre inscription
+            <a href="#" class="close-btn">Fermer</a>
+          </div>
           <form id="reserve" name="reserve" class="reserve">
-            <div id="validateMessage" class="validateMessage">Merci pour votre inscription</div>
             <div class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du prénom">
               <label for="first">Prénom</label><br>
               <input class="text-control" type="text" id="first" name="first" minlength="2" /><br>
@@ -80,10 +82,10 @@
             </div>
             <div class="formData" data-error="Veillez saisir une valeur numérique">
               <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-              <input  class="text-control" id="quantity" name="quantity" >
+              <input class="text-control" id="quantity" name="quantity">
             </div>
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
-            <div class="formData" data-error="Veillez choisir une ville">
+            <div id="radio-form-data" class="formData" data-error="Veillez choisir une ville">
               <input class="checkbox-input" type="radio" id="location1" name="location" value="New York" />
               <label class="checkbox-label" for="location1">
                 <span class="checkbox-icon"></span>

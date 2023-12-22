@@ -1,48 +1,13 @@
 import './modal.css'
-import { modalBtn, modalbg, btnClose, firstName, lastName, aEditNav, form, myTopNav, emailAdd, birthdate, quantity } from './components/domLinker';
-
-
+import {
+  modalBtn, modalbg, btnClose, firstName, lastName, aEditNav, form, myTopNav, emailAdd, birthdate,
+  quantity, checkBox, validationMessage, radioFormData, formContainer, validateClose
+} from './components/domLinker';
 
 aEditNav.addEventListener('click', () => editNav())
 btnClose.addEventListener('click', () => closeModal())
 modalBtn.forEach((btn) => btn.addEventListener("click", () => launchModal()));
 form.addEventListener('submit', event => validForm(event))
-
-
-
-
-
-// launch modal form
-const launchModal = () => modalbg.style.display = "block"
-//closing button
-const closeModal = () => modalbg.style.display = "none"
-
-const validForm = e => {
-  e.preventDefault()
-  // testName()
-  // testFirstName()
-  testNameAndFirst(firstName)
-  testNameAndFirst(lastName)
-  testMail(emailAdd)
-  testBirthdate(birthdate)
-  testQuantity(quantity)
-  //import de la vérfication de tous les boutons radios et attribution du data error
-  form.querySelectorAll('input[type="radio"]').forEach(radio => {
-    radio.parentNode.setAttribute('data-error-visible', isRadio());
-  });
-//import de la vérification du checkbox et attribution du data error
-  document.getElementById('checkbox1').parentNode.setAttribute('data-error-visible', !isCheckBox());
-
-
-  //fonction à terminer
-  showValidationMessage()
-  console.log('formulaire soumis')
-}
-
-//pour verifier si une variable est du texte
-const isAlphaWithTwoDigit = value => /^([a-zA-Z]){2,}$/.test(value)
-//pour verifier si une variable est un mail
-const isAMail = value => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)
 
 
 
@@ -54,39 +19,99 @@ const editNav = () => {
   }
 }
 
-// const testName = () => lastName.parentNode.setAttribute('data-error-visible', !isAlphaWithTwoDigit(lastName.value))
-// const testFirstName = () => firstName.parentNode.setAttribute('data-error-visible', !isAlphaWithTwoDigit(firstName.value))
+// launch modal form
+const launchModal = () => {
+  modalbg.style.display = "block";
+  validationMessage.style.display = 'none';
+  formContainer.style.display = "block";
+}
+
+//message de confirmation
+const showValidationMessage = () => {
+  validationMessage.style.display = 'block';
+  formContainer.style.display = 'block'; // 
+  form.style.display="none";
+  document.querySelector('.validateMessage .close-btn').addEventListener('click', closeModal);
+}
+
+//closing button
+const closeModal = () => modalbg.style.display = "none"
+
+
+//pour verifier si une variable est du texte
+const isAlphaWithTwoDigit = value => /^([a-zA-Z]){2,}$/.test(value)
+//pour verifier si une variable est un mail
+const isAMail = value => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)
+// pour verifier que c'est bien un nombre positif
+const isNumber = value => /^([0-9]){1,}$/.test(value)
+const isValidDate = inputElement => new Date(inputElement.value) < new Date()
 
 // Ici on a la verification du nom et prenom et attribution data error
-const testNameAndFirst = inputElement => inputElement.parentNode.setAttribute('data-error-visible', !isAlphaWithTwoDigit(inputElement.value)) 
+const testNameAndFirst = inputElement => inputElement.parentNode.setAttribute('data-error-visible', !isAlphaWithTwoDigit(inputElement.value))
 //verification du mail
-const testMail = inputElement =>inputElement.parentNode.setAttribute('data-error-visible', !isAMail(inputElement.value))
+const testMail = inputElement => inputElement.parentNode.setAttribute('data-error-visible', !isAMail(inputElement.value))
 
 //verification de la birthdate et attribution data error
 const testBirthdate = inputElement => {
-  const todayDate = new Date(inputElement.value);
-  const tomorrowDate = new Date();
-  tomorrowDate.setHours(0, 0, 0, 0);
-  const isValidDate = !isNaN(todayDate.getTime()) && todayDate < tomorrowDate;
-  inputElement.parentNode.setAttribute('data-error-visible', !isValidDate);
+  inputElement.parentNode.setAttribute('data-error-visible', !isValidDate(inputElement));
 };
 
 //pour vérifier que la valeur est numérique et attribution data error
-const testQuantity = inputElement => inputElement.parentNode.setAttribute('data-error-visible', !Number(inputElement.value) && Number(inputElement.value) > 0);
+const testQuantity = inputElement => inputElement.parentNode.setAttribute('data-error-visible', !isNumber(inputElement.value));
 
 //vérifications des boutons radio 
 const isRadio = () => Array.from(form.querySelectorAll('input[type="radio"]')).every(radio => !radio.checked);
 
 //vérification des checkbox
-const isCheckBox = () => document.getElementById('checkbox1').checked;
+const isCheckBox = () => checkBox.checked;
 
 
 
+const isFormValid = () => {
+
+  // testName()
+  // testFirstName()
+  testNameAndFirst(firstName)
+  testNameAndFirst(lastName)
+  testMail(emailAdd)
+  testBirthdate(birthdate)
+  testQuantity(quantity)
+  //import de la vérfication de tous les boutons radios et attribution du data error
+  radioFormData.setAttribute('data-error-visible', isRadio())
+  //import de la vérification du checkbox et attribution du data error
+  document.getElementById('checkbox1').parentNode.setAttribute('data-error-visible', !isCheckBox());
 
 
-//message de confirmation
-const validationMessage = document.getElementById('validateMessage')
-const showValidationMessage = () => {
-  form.classList.add('confirmation');
-  validationMessage.style.display = 'none';
+  console.log("isAlphaWithTwoDigit(firstName):", isAlphaWithTwoDigit(firstName.value))
+  console.log("isAlphaWithTwoDigit(lastName):", isAlphaWithTwoDigit(lastName.value))
+  console.log("isAMail(emailAdd):", isAMail(emailAdd.value))
+  console.log("isValidDate(birthdate):", isValidDate(birthdate))
+  console.log("isNumber(quantity):", isNumber(quantity.value))
+  console.log("!isRadio():", !isRadio())
+  console.log("isCheckBox():", isCheckBox())
+
+  return (
+    isAlphaWithTwoDigit(firstName.value) &&
+    isAlphaWithTwoDigit(lastName.value) &&
+    isAMail(emailAdd.value) &&
+    isValidDate(birthdate) &&
+    isNumber(quantity.value) &&
+    !isRadio() &&
+    isCheckBox()
+  )
+  
+}
+
+const validForm = e => {
+  e.preventDefault()
+
+  console.log('formulaire soumis')
+
+  if (isFormValid()) {
+    //fonction à terminer
+    showValidationMessage()
+    console.log("c'est ok")
+  } else {
+    console.log('ko')
+  }
 }
