@@ -8,7 +8,7 @@ aEditNav.addEventListener('click', () => editNav())
 btnClose.addEventListener('click', () => closeModal())
 modalBtn.forEach((btn) => btn.addEventListener("click", () => launchModal()));
 form.addEventListener('submit', event => validForm(event))
-
+validateClose.addEventListener('click', () => closeModal());
 
 
 const editNav = () => {
@@ -24,14 +24,14 @@ const launchModal = () => {
   modalbg.style.display = "block";
   validationMessage.style.display = 'none';
   formContainer.style.display = "block";
+  form.style.display = "block";
 }
 
 //message de confirmation
 const showValidationMessage = () => {
   validationMessage.style.display = 'block';
   formContainer.style.display = 'block'; // 
-  form.style.display="none";
-  document.querySelector('.validateMessage .close-btn').addEventListener('click', closeModal);
+  form.style.display = "none";
 }
 
 //closing button
@@ -82,6 +82,7 @@ const isFormValid = () => {
   document.getElementById('checkbox1').parentNode.setAttribute('data-error-visible', !isCheckBox());
 
 
+  //pour vérifier toutes les entrées du formulaires et submit
   console.log("isAlphaWithTwoDigit(firstName):", isAlphaWithTwoDigit(firstName.value))
   console.log("isAlphaWithTwoDigit(lastName):", isAlphaWithTwoDigit(lastName.value))
   console.log("isAMail(emailAdd):", isAMail(emailAdd.value))
@@ -99,7 +100,7 @@ const isFormValid = () => {
     !isRadio() &&
     isCheckBox()
   )
-  
+
 }
 
 const validForm = e => {
@@ -108,7 +109,6 @@ const validForm = e => {
   console.log('formulaire soumis')
 
   if (isFormValid()) {
-    //fonction à terminer
     showValidationMessage()
     console.log("c'est ok")
   } else {

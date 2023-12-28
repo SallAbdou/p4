@@ -53,7 +53,7 @@ img {
   padding: 12px 12px;
   margin: 5px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   font-family: Roboto, sans-serif;
 }
 
@@ -73,7 +73,10 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+
+
+/*VersionDesktop*/
+@media screen and (max-width: 1013px) {
   .topnav a {
     display: none;
   }
@@ -84,7 +87,7 @@ img {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1013px) {
   .topnav.responsive {
     position: relative;
   }
@@ -104,6 +107,8 @@ img {
 
 
 
+/*Version Mobile */
+
 @media screen and (max-width: 540px) {
   .topnav a {
     display: none;
@@ -112,7 +117,7 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    margin-top: -13px;
   }
 }
 
@@ -219,6 +224,7 @@ main {
   width: 31%;
   margin-left: 35%;
   height: 31px;
+  padding-top: 1%;
 }
 
 .content {
@@ -242,7 +248,7 @@ main {
 
 label {
   font-family: var(--font-default);
-  font-size: 17px;
+  font-size: 14px;
   font-weight: normal;
   display: inline-block;
   margin-bottom: 11px;
@@ -259,13 +265,13 @@ input {
   padding: 8px;
   width: 100%;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: 18px;
   height: 48px;
 }
 
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: 0.4em;
+  font-size: 10px;
   color: #e54858;
   display: block;
   margin-top: 7px;
@@ -283,12 +289,6 @@ input {
   border: 2px solid #e54858;
 }
 
-/* 
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -514,12 +514,13 @@ input[data-error]::after {
 }
 
 .hero-headline {
-  font-size: 6rem;
+  font-size: 96px;
   font-weight: normal;
   white-space: nowrap;
 }
 
 .hero-text {
+  font-size: 24px;
   width: 146%;
   font-weight: normal;
   margin-top: 57px;
@@ -544,7 +545,6 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
-  object-fit: cover;
 }
 
 .copyrights {
@@ -565,7 +565,7 @@ footer {
   margin: 0 20px;
 }
 
-/**********version mobile*******/
+/**********version Tablette*******/
 
 @media screen and (max-width: 800px) {
   .hero-section {
@@ -578,6 +578,8 @@ footer {
     color: #000;
     padding: 20px;
     width: 80%;
+    min-width: 0px;
+    max-width: 400px;
   }
 
   .hero-content::after {
@@ -591,11 +593,15 @@ footer {
   .hero-headline {
     font-size: 40px;
     white-space: normal;
+    min-width: 266px;
+    max-width: 347px;
   }
 
   .hero-text {
-    width: unset;
     font-size: 13px;
+    white-space: normal;
+    min-width: 100px;
+    max-width: 400px;
   }
 
   .hero-img img {
